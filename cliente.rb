@@ -1,10 +1,12 @@
-class Cliente
-  require 'socket'
+require 'socket'
 
-  def initialize
+
+class Cliente
+
+  def initialize(longitude,latitude)
     s = TCPSocket.open('localhost', 8000)
-    @longitude = rand(-180.000..180.000) #longitude do xdk
-    @latitude = rand(-90.000..90.000) #latitude do xdk
+    @longitude = longitude #longitude do xdk
+    @latitude = latitude #latitude do xdk
   end
 
 
@@ -29,4 +31,8 @@ class Cliente
 
 end
 
-c = Cliente.new
+
+
+#Criação de clientes
+c1=Cliente.new(41.569504,-8.433332)
+c2=Cliente.new(41.570345,-8.895043)

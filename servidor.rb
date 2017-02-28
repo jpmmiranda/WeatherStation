@@ -1,6 +1,7 @@
-class Servidor
-  require 'socket'
+require 'socket'
 
+
+class Servidor
   server = TCPServer.open(8000)
   loop {
     Thread.start(server.accept) do |client|
@@ -12,4 +13,18 @@ class Servidor
 
     end
   }
+
+  def listarClientes #Apresenta lista de clientes que estão ligados e a sua localização
+
+  end
+
+  def valoresSensorTemperatura(cliente) # Apresentar valores recolhidos de temperatura de um dado xdk
+
+  end
+
+
+  def valoresSensorAcustica(cliente) # Apresentar valores recolhidos de acustica de um dado xdk
+
+  end
+
 end
