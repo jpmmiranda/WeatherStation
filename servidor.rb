@@ -3,21 +3,21 @@ require 'socket'
 
 class Servidor
   def initialize(port)
-  	@port = port
+  	@server = TCPServer.open(port)
   end
 
   def start
-  	server = TCPServer.open(@port)
 	  loop {
-	    Thread.start(server.accept) do |client|
-
+	    Thread.start(@server.accept) do |client|
+	   	  contadorLeituras = -1 
 	      # Faz coisas
 	      puts "Cliente : #{client} conectou-se ao sistema"
 	      while true do
 	      	leitura = client.gets.chomp
+	      	contadorLeituras = contadorLeituras + 1
 	      	if(leitura == "Fim")
 	      		client.close
-		      	puts "Cliente : #{client} desconectou-se do sistema"
+		      	puts "Cliente : #{client} desconectou-se do sistema com #{contadorLeituras} leituras."
 		    else
 	  	  		puts "#{client}: #{leitura}"
 	  	  	end
@@ -25,6 +25,10 @@ class Servidor
 
 	    end
 	  }
+  end
+
+  def close
+  	@server.close
   end
 
   def listarClientes #Apresenta lista de clientes que estão ligados e a sua localização
@@ -42,23 +46,25 @@ class Servidor
 
 end
 
+server = Servidor.new(8000)
+
 # Signal catching
 def shut_down
   puts "\nShutting down server..."
-  sleep 1
 end
 
 # Trap ^C 
 Signal.trap("INT") { 
   shut_down
+  server.close
   exit
 }
 
 # Trap `Kill `
 Signal.trap("TERM") {
   shut_down
+  server.close
   exit
 }
 
-server = Servidor.new(8000)
 server.start
