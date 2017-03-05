@@ -7,11 +7,17 @@ class Cliente
     @s = TCPSocket.open('localhost', 8000)
     @longitude = longitude #longitude do xdk
     @latitude = latitude #latitude do xdk
+    enviaCoords
   end
 
 
   def enviaFim
   	@s.puts "Fim"
+  end
+
+  def enviaCoords
+    @s.puts @longitude
+    @s.puts @latitude
   end
 
   def geraTemp
