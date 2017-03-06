@@ -19,15 +19,33 @@
           lat = client.gets.chomp
   	      puts "Cliente com longitude #{long} e latitude #{lat} conectou-se ao sistema"
           @bd.verificaClienteExiste(long,lat)
+
   	      while true do
-  	      	leitura = client.gets.chomp
-  	      	contadorLeituras = contadorLeituras + 1
-  	      	if(leitura == "Fim")
-  	      		client.close
-  		      	puts "Cliente : longitude #{long} e latitude #{lat} desconectou-se do sistema com #{contadorLeituras} leituras."
-  		    else
-  	  	  		puts "Cliente com longitude #{long} e latitude #{lat}: #{leitura}"
-  	  	  	end
+
+            leitura = client.gets.chomp
+
+            if(leitura == "Fim")
+              client.close
+              puts "Cliente : longitude #{long} e latitude #{lat} desconectou-se do sistema com #{contadorLeituras} leituras."
+            else
+
+              if(leitura=="T")
+                leituraT = client.gets.chomp
+
+                timestamp = client.gets.chomp
+
+                contadorLeituras = contadorLeituras + 1
+                @bd.adicionaRegistoTemperatura(leituraT,timestamp,long,lat)
+              
+              else leituraR = client.gets.chomp
+                timestamp = client.gets.chomp
+                contadorLeituras = contadorLeituras + 1
+                @bd.adicionaRegistoRuido(leituraR,timestamp,long,lat)
+              end
+
+              
+            
+            end
   	      end
 
   	    end
@@ -45,12 +63,12 @@
 
       end
 
-      def valoresSensorTemperatura(cliente) # Apresentar valores recolhidos de temperatura de um dado xdk
+      def valoresSensorTemperatura(long,lat) # Apresentar valores recolhidos de temperatura de um dado xdk
       	
       end
 
 
-      def valoresSensorAcustica(cliente) # Apresentar valores recolhidos de acustica de um dado xdk
+      def valoresSensorRuido(long,lat) # Apresentar valores recolhidos de ruido de um dado xdk
 
       end
 

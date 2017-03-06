@@ -18,8 +18,8 @@ USE `Leituras` ;
 -- Table `Leituras`.`Local`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Leituras`.`Local` (
-  `Longitude` FLOAT NOT NULL,
-  `Latitude` FLOAT NOT NULL,
+  `Longitude` DECIMAL(11,8) NOT NULL,
+  `Latitude` DECIMAL(10,8) NOT NULL,
   PRIMARY KEY (`Longitude`, `Latitude`))
 ENGINE = InnoDB;
 
@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS `Leituras`.`Registos` (
   `Temperatura` INT NULL,
   `Ruído` INT NULL,
   `Data` DATETIME NOT NULL,
-  `Local_Longitude` FLOAT NOT NULL,
-  `Local_Latitude` FLOAT NOT NULL,
+  `Local_Longitude` DECIMAL(11,8) NOT NULL,
+  `Local_Latitude` DECIMAL(10,8) NOT NULL,
   INDEX `fk_Registos_Local_idx` (`Local_Longitude` ASC, `Local_Latitude` ASC),
   CONSTRAINT `fk_Registos_Local`
     FOREIGN KEY (`Local_Longitude` , `Local_Latitude`)

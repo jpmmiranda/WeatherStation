@@ -30,10 +30,14 @@ class Cliente
 			else
 				readingTemp -= 1 
 			end
-			@s.puts "A temperatura é: #{readingTemp} graus."
+      time = Time.now.getutc
+      @s.puts "T"
+			@s.puts readingTemp
+      @s.puts time
 		end
 
   end
+
   def geraAcust
   	readingNoise = rand(300) #gama provavelmente incorreta
 
@@ -44,7 +48,10 @@ class Cliente
 			else
 				readingNoise -= 50 
 			end
-			@s.puts "O ruído é #{readingNoise} dB."
+			time = Time.now.getutc
+      @s.puts "R"
+      @s.puts readingNoise
+      @s.puts time
 		end
   end
 
@@ -53,7 +60,7 @@ end
 
 #Criação de clientes
 c1=Cliente.new(41.569504,-8.433332)
-c2=Cliente.new(41.570345,-8.895043)
+#c2=Cliente.new(41.570345,-8.895043)
 
 # Signal catching
 def shut_down
