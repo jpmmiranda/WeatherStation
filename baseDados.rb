@@ -11,20 +11,20 @@
     end
 
     def verificaClienteExiste(long,lat)
-        rs = @con.query("SELECT COUNT(*) from Local where Longitude= " + long + 
+        rs = @con.query("SELECT count(*) from Local where Longitude= " + long + 
           " and Latitude= " + lat)
-       
         total = rs.fetch_row 
-        if(total==0) 
-          rs = @con.query 'insert into Local values ( ' + long  + ', ' + lat + ')' 
+        puts total[0]
+        if(total[0] == '0') 
+          puts "deus"
+          rs = @con.query 'insert into local values ( ' + long  + ', ' + lat + ')' 
         end
     end
 
     def adicionaRegistoTemperatura(leitura,timestamp,long,lat)
-
        rs = @con.query 'insert into Registos (Temperatura, Data,Local_Longitude,Local_Latitude) values ( ' +   
             leitura + ", '#{timestamp}'" + ', ' + long + ', ' + lat + ')' 
-      
+
     end
 
 
