@@ -15,7 +15,7 @@
           " and Latitude= " + lat)
         total = rs.fetch_row 
         if(total[0] == '0') 
-          rs = @con.query 'insert into local values ( ' + long  + ', ' + lat + ')' 
+          rs = @con.query 'insert into Local values ( ' + long  + ', ' + lat + ')' 
         end
     end
 
