@@ -14,9 +14,7 @@
         rs = @con.query("SELECT count(*) from Local where Longitude= " + long + 
           " and Latitude= " + lat)
         total = rs.fetch_row 
-        puts total[0]
         if(total[0] == '0') 
-          puts "deus"
           rs = @con.query 'insert into local values ( ' + long  + ', ' + lat + ')' 
         end
     end
