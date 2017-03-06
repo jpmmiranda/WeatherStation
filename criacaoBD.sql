@@ -30,7 +30,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Leituras`.`Registos` (
   `Temperatura` INT NULL,
   `Ruído` INT NULL,
-  `Data` DATETIME NOT NULL,
+  `Data` VARCHAR(45) NOT NULL,
   `Local_Longitude` DECIMAL(11,8) NOT NULL,
   `Local_Latitude` DECIMAL(10,8) NOT NULL,
   INDEX `fk_Registos_Local_idx` (`Local_Longitude` ASC, `Local_Latitude` ASC),
