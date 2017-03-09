@@ -24,7 +24,7 @@ class Cliente
   	readingTemp = rand(30) #gama provavelmente incorreta
 
 		while true do
-			sleep 2
+			sleep 30
 			if(rand(2) == 1)
 				readingTemp += 1
 			else
@@ -42,7 +42,7 @@ class Cliente
   	readingNoise = rand(300) #gama provavelmente incorreta
 
 		while true do
-			sleep 30
+			sleep 1
 			if(rand(2) == 1)
 				readingNoise += 50
 			else
