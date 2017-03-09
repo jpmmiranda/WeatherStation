@@ -30,4 +30,14 @@
       rs = @con.query 'insert into Registos (Ruido, Data,Local_Longitude,Local_Latitude) values ( ' +   
             leitura + ", '#{timestamp}'" + ', ' + long + ', ' + lat + ')'
     end
+
+    def mostraValoresTemperatura(long, lat)
+      puts "hello"
+      rs = @con.query 'SELECT Data, Ruido from Registos where Local_Longitude ='+long+
+      ' and Local_Latitude =' + lat
+      puts "ola"
+      valores = rs.fetch_row
+      puts valores[0]
+      valores.each { |x| puts x}
+    end
   end

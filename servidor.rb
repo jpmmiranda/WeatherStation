@@ -3,11 +3,13 @@
   require './baseDados'
 
   class Servidor
+    include Enumerable
 
     def initialize(port)
       	@server = TCPServer.open(port)  
         #my = Mysql.new(hostname, username, password, databasename)  
-        @bd = BaseDados.new('localhost', 'root', 'root', 'Leituras')  
+        @bd = BaseDados.new('localhost', 'root', 'root', 'Leituras') 
+        @arrayClientes = Array.new
     end
 
     def start
@@ -19,6 +21,7 @@
           lat = client.gets.chomp
   	      puts "Cliente com longitude #{long} e latitude #{lat} conectou-se ao sistema"
           @bd.verificaClienteExiste(long,lat)
+          @arrayClientes.push(long,lat)
 
   	      while true do
 
@@ -26,6 +29,8 @@
 
             if(leitura == "Fim")
               client.close
+              @arrayClientes.delete(long)
+              @arrayClientes.delete(lat)
               puts "Cliente : longitude #{long} e latitude #{lat} desconectou-se do sistema com #{contadorLeituras} leituras."
             else
 
@@ -60,11 +65,13 @@
       
 
       def listarClientes #Apresenta lista de clientes que estão ligados e a sua localização
-
+        y = @arrayClientes.each_slice(2).to_a
+        y.each{ |coords| puts "Cliente | [Longitude, Latitude]: "+coords.to_s}
       end
 
       def valoresSensorTemperatura(long,lat) # Apresentar valores recolhidos de temperatura de um dado xdk
-      	
+      	@bd.mostraValoresTemperatura(long,lat)
+        #valores.each { |x| puts x}
       end
 
 
@@ -95,4 +102,24 @@
     exit
   }
 
+serverThread=Thread.new{
   server.start
+}
+system "clear"
+
+menuThread=Thread.new{
+  while true do
+    puts "----------------------------------------------"
+    puts "| 1. Listar clientes                         |"
+    puts "| 2. Listar valores de um determinado sensor |"
+    puts "----------------------------------------------"
+    if gets.chomp == "1"
+      server.listarClientes
+    else 
+      server.valoresSensorTemperatura(41.569504,-8.433332)
+    end
+  end
+}
+
+serverThread.join
+menuThread.join
