@@ -27,7 +27,7 @@
 
 
     def adicionaRegistoRuido(leitura,timestamp,long,lat)
-      rs = @con.query 'insert into Registos (Ruído, Data,Local_Longitude,Local_Latitude) values ( ' +   
+      rs = @con.query 'insert into Registos (Ruido, Data,Local_Longitude,Local_Latitude) values ( ' +   
             leitura + ", '#{timestamp}'" + ', ' + long + ', ' + lat + ')'
     end
   end

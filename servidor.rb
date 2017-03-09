@@ -7,7 +7,7 @@
     def initialize(port)
       	@server = TCPServer.open(port)  
         #my = Mysql.new(hostname, username, password, databasename)  
-        @bd = BaseDados.new('localhost', 'root', 'ruiborges', 'Leituras')  
+        @bd = BaseDados.new('localhost', 'root', 'root', 'Leituras')  
     end
 
     def start

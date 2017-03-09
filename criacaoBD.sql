@@ -29,7 +29,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Leituras`.`Registos` (
   `Temperatura` INT NULL,
-  `Ruído` INT NULL,
+  `Ruido` INT NULL,
   `Data` VARCHAR(45) NOT NULL,
   `Local_Longitude` DECIMAL(11,8) NOT NULL,
   `Local_Latitude` DECIMAL(10,8) NOT NULL,
