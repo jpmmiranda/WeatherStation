@@ -31,13 +31,8 @@
             leitura + ", '#{timestamp}'" + ', ' + long + ', ' + lat + ')'
     end
 
-    def mostraValoresTemperatura(long, lat)
-      puts "hello"
-      rs = @con.query 'SELECT Data, Ruido from Registos where Local_Longitude ='+long+
-      ' and Local_Latitude =' + lat
-      puts "ola"
-      valores = rs.fetch_row
-      puts valores[0]
-      valores.each { |x| puts x}
+    def mostraValoresRuido(long, lat)
+      rs = @con.query "SELECT Data, Ruido from Registos where Local_Longitude = "+long+
+      " and Local_Latitude = "+ lat + " and Ruido IS NOT NULL"
     end
   end

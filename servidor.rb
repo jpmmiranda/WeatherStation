@@ -70,13 +70,15 @@
       end
 
       def valoresSensorTemperatura(long,lat) # Apresentar valores recolhidos de temperatura de um dado xdk
-      	@bd.mostraValoresTemperatura(long,lat)
-        #valores.each { |x| puts x}
+      	
       end
 
 
       def valoresSensorRuido(long,lat) # Apresentar valores recolhidos de ruido de um dado xdk
-
+        valores = @bd.mostraValoresRuido(long,lat)
+        valores.each do |row|
+          puts row.join("\s")
+        end
       end
 
   end
@@ -116,7 +118,7 @@ menuThread=Thread.new{
     if gets.chomp == "1"
       server.listarClientes
     else 
-      server.valoresSensorTemperatura(41.569504,-8.433332)
+      server.valoresSensorRuido("41.569504","-8.433332")
     end
   end
 }
