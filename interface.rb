@@ -5,19 +5,19 @@ class Interface
 
 	         n = 0,i=0
 
-	         printf("################# Valores Recolhidos #####################\n");
+	         printf("---------- Valores Recolhidos ------------\n");
 	         while i<20 && index < tamanho do
-	            printf("# %s \t\t\t\t #\n",valores[index])
+	            printf("| %s \t\t |\n",valores[index])
 	            contador+=1
 	            index+=1
 	            i+=1
 	         end
 	        
-	         printf("##########################################################\n")
-	         printf("# 1. Continuar.                                          #\n")
-	         printf("# 2. Retroceder.                                         #\n")
-	         printf("# 0. Sair.                                               #\n")
-	         printf("##########################################################\n")
+	         printf("------------------------------------------\n")
+	         printf("| 1. Continuar.                          |\n")
+	         printf("| 2. Retroceder.                         |\n")
+	         printf("| 0. Sair.                               |\n")
+	         printf("------------------------------------------\n")
 	         printf(">")
 
 	          n = gets.chomp.to_i
@@ -64,6 +64,7 @@ class Interface
      	 puts "| 2. Listar valores de um determinado sensor |"
     	 puts "| 0. Sair                                    |"
   	     puts "----------------------------------------------"
+  	     printf(">")
 	end
 
 	def imprimeMenuListar
@@ -72,6 +73,7 @@ class Interface
          puts "| 2. Listar valores do sensor de temperatura |"
          puts "| 0. Sair                                    |"
          puts "----------------------------------------------"
+         printf(">")
 	end
 
 	def imprimeMenuSelecionarCliente

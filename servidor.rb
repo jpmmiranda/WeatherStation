@@ -18,7 +18,6 @@
         loop {
           Thread.start(@server.accept) do |client|
             contadorLeituras = -1 
-            # Faz coisas
             long = client.gets.chomp
             lat = client.gets.chomp
             puts "Cliente com longitude #{long} e latitude #{lat} conectou-se ao sistema"
