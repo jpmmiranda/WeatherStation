@@ -15,6 +15,12 @@ class Cliente
   	@s.puts "Fim"
   end
 
+  def esperaFecho
+    gets.chomp
+    shut_down
+    exit
+  end
+
   def enviaCoords
     @s.puts @longitude
     @s.puts @latitude
