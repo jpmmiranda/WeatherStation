@@ -65,8 +65,7 @@ class Cliente
 end
 
 #Criação de clientes
-c1=Cliente.new(41.569504,-8.433332)
-#c2=Cliente.new(41.570345,-8.895043)
+c=Cliente.new(ARGV[0],ARGV[1])
 
 # Signal catching
 def shut_down
@@ -77,22 +76,22 @@ end
 # Trap ^C 
 Signal.trap("INT") { 
   shut_down 
-  c1.enviaFim
+  c.enviaFim
   exit
 }
 
 # Trap `Kill `
 Signal.trap("TERM") {
   shut_down
-  c1.enviaFim
+  c.enviaFim
   exit
 }
 
 threadTemp = Thread.new{
-	c1.geraTemp
+	c.geraTemp
 }
 threadNoise = Thread.new{
-	c1.geraAcust
+	c.geraAcust
 }
 
 threadNoise.join

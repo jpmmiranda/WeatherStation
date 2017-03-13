@@ -30,10 +30,13 @@ class Interface
 	              imprimeQuery(valores, contador, index,tamanho)
 	            else 
 	              if(n == 1 && contador == tamanho)
-	                
-	                printf("Impossível continuar.\n")
-	                imprimeQuery(valores, contador-20, index-20,tamanho)
-	              
+	                if index<20
+		                printf("Impossível continuar.\n")
+		                imprimeQuery(valores, contador-index, 0,tamanho)
+	                else
+	                	printf("Voltou ao início\n")
+	                	imprimeQuery(valores, contador-index, index-index,tamanho)
+	              	end
 	              else 
 	                if(n == 2 && (contador-40) >= 0)
 	                  
@@ -41,10 +44,13 @@ class Interface
 	              
 	                else 
 	                  if(n == 2 && (contador-40) <= 0)
-	                  	puts contador
-	                    printf("Impossível retroceder.\n")
-	                    imprimeQuery(valores, contador-20, index-20,tamanho)
-	                
+	                    if index<20
+		                    printf("Impossível retroceder.\n")
+		                    imprimeQuery(valores, contador-index,0,tamanho)
+	                	else
+	                		printf("Impossível retroceder.\n")
+	                   		imprimeQuery(valores, contador-index,contador-index,tamanho)
+	                	end
 	                  else 
 	                      if(n != 0)
 	                          printf("\033c")
