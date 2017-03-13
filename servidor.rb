@@ -23,7 +23,7 @@
             puts "Cliente com longitude #{long} e latitude #{lat} conectou-se ao sistema"
             @bd.insereCliente(long,lat)
             @arrayClientes.push(long,lat)
-
+            
             while true do
 
               leitura = client.gets.chomp
