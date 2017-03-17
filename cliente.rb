@@ -56,6 +56,18 @@ class Cliente
 		end
   end
 
+  def servidorClose
+  	while true do
+  		mensagem = @s.gets.chomp
+  		if mensagem == "Fim"
+  			@s.close
+  			puts "Servidor desligou-se."
+  			puts "Shutting down..."
+  			exit
+  		end
+  	end
+  end
+
 
 end
 
@@ -89,7 +101,12 @@ threadNoise = Thread.new{
 	c.geraAcust
 }
 
+threadMensagem = Thread.new{
+	c.servidorClose
+}
+
 threadNoise.join
 threadTemp.join
+threadMensagem.join
 
 

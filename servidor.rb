@@ -8,8 +8,9 @@
       def initialize(port)
           @server = TCPServer.open(port)  
           #my = Mysql.new(hostname, username, password, databasename)  
-          @bd = BaseDados.new('localhost', 'root', 'ruiborges', 'Leituras') 
+          @bd = BaseDados.new('localhost', 'root', 'root', 'Leituras') 
           @arrayClientes = Array.new
+          @arraySocketIds = Array.new
           @int = Interface.new
 
       end
@@ -23,6 +24,8 @@
             puts "Cliente com longitude #{long} e latitude #{lat} conectou-se ao sistema"
             @bd.insereCliente(long,lat)
             @arrayClientes.push(long,lat)
+            @arraySocketIds.push(client)
+
             
             while true do
 
@@ -97,6 +100,7 @@
 
       def close
         @bd.close
+        @arraySocketIds.each{ |socket| socket.puts "Fim"}
         @server.close
       end
 
@@ -105,26 +109,26 @@ end
 
   
 
-  server = Servidor.new(8000)
+server = Servidor.new(8000)
 
-  # Signal catching
-  def shut_down
-    puts "\nShutting down server..."
-  end
+# Signal catching
+def shut_down
+puts "\nShutting down server..."
+end
 
-  # Trap ^C 
-  Signal.trap("INT") { 
-    shut_down
-    server.close
-    exit
-  }
+# Trap ^C 
+Signal.trap("INT") { 
+shut_down
+server.close
+exit
+}
 
-  # Trap `Kill `
-  Signal.trap("TERM") {
-    shut_down
-    server.close
-    exit
-  }
+# Trap `Kill `
+Signal.trap("TERM") {
+shut_down
+server.close
+exit
+}
 
 serverThread=Thread.new{
   server.start
@@ -134,7 +138,7 @@ system "clear"
 
 menuThread=Thread.new{
 
-  bd = BaseDados.new('localhost', 'root', 'ruiborges', 'Leituras') 
+  bd = BaseDados.new('localhost', 'root', 'root', 'Leituras') 
   int = Interface.new
 
   while true do
@@ -146,7 +150,9 @@ menuThread=Thread.new{
       printf("Comando inválido\n")
     else
       if n == 0
-        puts 'Servidor vai à vida' ##Tratar do bug
+        shut_down
+        server.close
+        exit
       else
             
       if n == 1
